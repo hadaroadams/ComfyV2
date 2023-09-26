@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.menu li a:focus{
+  @apply bg-slate-800 text-white dark:bg-[#FF7AC6]
+}
