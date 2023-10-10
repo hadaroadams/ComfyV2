@@ -5,3 +5,6 @@
 .menu li a:focus{
   @apply bg-slate-800 text-white dark:bg-[#FF7AC6]
 }
+/* input[type=range]::-webkit-slider-runnable-track {
+  background-color: blue;
+} */
