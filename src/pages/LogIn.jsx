@@ -1,10 +1,14 @@
 import React from 'react'
 import FormInput from '../components/FormInput'
-import { Form, Link, useNavigation } from 'react-router-dom'
+import { Form, Link, useNavigate, useNavigation } from 'react-router-dom'
 
 const LogIn = () => {
-    const {state}= useNavigation()
-    console.log(state)
+    // const {state}= useNavigation()
+    const navigate = useNavigate()
+    // console.log(state)
+    const handlelogIn=()=>{
+      navigate('/')
+    }
   return (
     <div className='w-full min-h-screen bg-white flex justify-center items-center'>
         <section className='p-10 w-10/12 md:w-[500px] shadow-md'>
@@ -13,7 +17,7 @@ const LogIn = () => {
                 <FormInput label='UserName' type='text' defaultValue={''} name={'username'} placeholder={'Enter Username'} />
                 <FormInput label='Password' type='password' defaultValue={''} name={'password'} placeholder={'Enter Password'} />
                 <button type='submit' className='btn bg-[#0069E0] border-none text-[white]'>
-                    {state=='submitting'?<><span className="loading loading-spinner"></span><span>Logging In</span></>:''}
+                    {/* {state=='submitting'?<><span className="loading loading-spinner"></span><span>Logging In</span></>:''} */}
                      LOGIN
                 </button>
                 <button className='btn bg-[#3B3187] border-none text-[white]'>GUEST USER</button>

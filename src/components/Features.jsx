@@ -13,7 +13,7 @@ const Features = () => {
                 data.map((item,index)=>{
                   const {id}= item
                   const  {image,title,company,price}= item.attributes
-                    return <ProductItem image={image} title={title} compnay={company} price={price} key={index} id={id}/>
+                    return <ProductItem image={image} title={title} compnay={company} price={price} key={index} id={id} layOut={true}/>
                 })
             }
         </div>

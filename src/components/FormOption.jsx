@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 const FormOption = ({label,options,name,}) => {
   const [opt,setOpt] = useState(options[0])
-  console.log(opt)
   return (
     <div className='w-full space-y-3 text-[#394e6a]'>
       <label htmlFor={name}>

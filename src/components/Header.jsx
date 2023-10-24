@@ -1,10 +1,17 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Loading from './Loading'
+import { useDispatch, useSelector } from 'react-redux'
+import { logoutUser } from '../features/UserSlice'
+import { clearCart } from '../features/CartSlice'
 
 const Header = () => {
     const [isdarkMode,setIsDarkMode] = useState(false)
-
+    const {cartItems,numItemsInCart}= useSelector((state)=> state.cart.value)
+    const navigate = useNavigate()
+    const {user} = useSelector((state)=>state.user)
+    const dispatch= useDispatch()
+    console.log(user)
     const colorTheme =()=>{
         setIsDarkMode((e)=>{
          return   !e
@@ -15,11 +22,31 @@ const Header = () => {
             document.body.classList.remove('dark')
         }
     }
+    const handlelogout=()=>{
+        dispatch(logoutUser())
+        dispatch(clearCart())
+        navigate('/')
+    }
   return (
     <>
-        <header className='bg-[#021431] dark:bg-[#414558] text-xs py-2 flex justify-center space-x-5 md:text-base md:justify-end px-20'>
-            <Link to='/Login' className=' hover:underline'>Sign in/Guest</Link>
-            <Link to='/Signup' className='hover:underline'>Create Account</Link>
+        <header className='bg-[#021431] dark:bg-[#414558] text-xs py-2 flex justify-center space-x-5 md:text-base items-center md:justify-end px-20'>
+            {
+                user?(
+                    <>
+                    <p>
+                        Hello, {user} 
+                    </p>
+                    <button onClick={handlelogout} className=' border-blue-600 border-2 p-1 px-3 rounded-full' >
+                        LOGOUT
+                    </button>
+                    </>
+                ):(
+                    <>
+                        <Link to='/Login' className=' hover:underline'>Sign in/Guest</Link>
+                        <Link to='/Signup' className='hover:underline'>Create Account</Link>
+                    </>
+                )
+            }
         </header>
         <nav className='bg-[#F0F6FF] dark:bg-[#181920] px-5 md:px-20 py-1 flex items-center justify-between text-[#394E6A]'>
             <div className="dropdown dropdown-bottom md:hidden ">
@@ -48,7 +75,7 @@ const Header = () => {
                     
                 </label>
                 <div className="indicator">
-                    <span className="indicator-item badge badge-secondary top-[6px] left-4 bg-[#0D7EFF] dark:bg-[#FF7AC6] border-none">9</span> 
+                    <span className="indicator-item badge badge-secondary top-[6px] left-4 bg-[#0D7EFF] dark:bg-[#FF7AC6] border-none">{numItemsInCart}</span> 
                     <Link to='/Cart' className="btn rounded-full bg-transparent hover:bg-[#CBD5E1] border-none text-[#394E6A] dark:text-[#F8F8F2] "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="h-6 w-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path></svg></Link>
                 </div>
             </div>

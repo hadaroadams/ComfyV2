@@ -4,11 +4,12 @@ export const ApiInstance = axios.create({
     baseURL:'https://strapi-store-server.onrender.com/api',
 })
 
-const CurrencyFormater = ()=>{
+export  const currencyFormater = (price)=>{
     const moneyFormatter = new Intl.NumberFormat('en-Ghana',{
         style:"currency",
         currency:'GHC',
-    }).format()
+    }).format( (price/100).toFixed(2))
+    return moneyFormatter
 }
 
 export const getNumberOfItems =(number)=>{

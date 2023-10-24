@@ -11,10 +11,11 @@ import SignUp from './pages/SignUp';
 import SingleProduct from './pages/SingleProduct';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Landing, { Loader as LandingLoader } from './pages/Landing';
-
+import { loader as SinglePageLoader } from './pages/SingleProduct';
+import {action as registrationAction} from './pages/SignUp'
+import store from './utilities/store';
 
 const queryClient = new QueryClient()
-
 const router= createBrowserRouter([
   {
     path:'/',
@@ -31,6 +32,7 @@ const router= createBrowserRouter([
         path:'/Products/:id',
         element:<SingleProduct/>,
         errorElement:<ErrorPage/>,
+        loader:SinglePageLoader,
       },
       {
         path:'/About',
@@ -67,7 +69,8 @@ const router= createBrowserRouter([
   {
     path:'/Signup',
     element:<SignUp/>,
-    errorElement:<ErrorPage/>
+    errorElement:<ErrorPage/>,
+    action : registrationAction,
   },
   
   

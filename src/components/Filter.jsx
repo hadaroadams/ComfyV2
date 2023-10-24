@@ -5,8 +5,10 @@ import FormRange from './FormRange'
 import FormCheckBox from './FormCheckBox'
 import { useLoaderData } from 'react-router-dom'
 const Filter = () => {
-  const {meta} = useLoaderData()
+  const {data} = useLoaderData()
+  const {meta} = data
   const {companies,categories,pagination} = meta
+
 
   return (
     <section className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 xl:grid-cols-4 bg-[#F0F6FF] p-10 mt-20 rounded-lg'>
