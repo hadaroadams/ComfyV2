@@ -13,7 +13,11 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Landing, { Loader as LandingLoader } from './pages/Landing';
 import { loader as SinglePageLoader } from './pages/SingleProduct';
 import {action as registrationAction} from './pages/SignUp'
+import {action as logInAction} from './pages/LogIn'
 import store from './utilities/store';
+import CheckOut from './pages/CheckOut';
+import {loader as checkOutLoader} from "./pages/CheckOut"
+import {action as checkOutAction} from './pages/CheckOut'
 
 const queryClient = new QueryClient()
 const router= createBrowserRouter([
@@ -50,22 +54,26 @@ const router= createBrowserRouter([
         element:<Cart/>,
         errorElement:<ErrorPage/>
       },
+      {
+        path:'/Checkout',
+        element:<CheckOut/>,
+        errorElement:<ErrorPage/>,
+        loader:checkOutLoader(store),
+        action:checkOutAction(store)
+      }
     ]
   },
   {
     path:'/Login',
     element:<LogIn/>,
     errorElement:<ErrorPage/>,
-    action:async ({request})=>{
-      let  formData= await request.formData()
-      console.log(formData)
-      return formData
-    },
-    loader:(e)=>{
-      console.log(e)
-      return ''
-    }
+    action: logInAction(store),
+    // loader:(e)=>{
+    //   console.log(e)
+    //   return ''
+    // }
   },
+
   {
     path:'/Signup',
     element:<SignUp/>,

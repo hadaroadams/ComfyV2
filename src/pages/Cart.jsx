@@ -23,10 +23,10 @@ const Cart = () => {
         <div className='my-4 flex gap-x-28 flex-col md:flex-row'>
             <div className='flex-[0.6] space-y-5'>
               {
-                cartItems.map((item)=>{
+                cartItems.map((item,key)=>{
                   const {title,price, image, company,color, cartId, amount}= item
                   console.log("num1   "+amount)
-                  return <CartItem id={cartId} title={title} image={image} color={color} amount={amount} company={company} price={price} />
+                  return <CartItem key={key} id={cartId} title={title} image={image} color={color} amount={amount} company={company} price={price} />
                 })
               }
             </div>

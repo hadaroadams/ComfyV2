@@ -1,4 +1,5 @@
 import { createSlice, current } from "@reduxjs/toolkit";
+import { toast } from "react-toastify";
 
 const defaultCartValue={
     cartItems:[],
@@ -8,11 +9,16 @@ const defaultCartValue={
     tax:0,
     orderTotal:0,
 }
+const getFromLocalStorage = ()=>{
+    const state = JSON.parse(localStorage.getItem('cart')) || defaultCartValue
+    console.log(state)
+    return state
+}
 
 export const CartSlice = createSlice({
     name:'cart',
     initialState: {
-        value:defaultCartValue,
+        value: getFromLocalStorage(),
     },
     reducers:{
         addItem:(state,action)=>{
@@ -25,6 +31,7 @@ export const CartSlice = createSlice({
                 cartList.cartItems.filter((item)=>{
                     if(item.cartId == action.payload.cartId){
                         item.amount+=action.payload.amount
+                        
                     }
                 })
             }else{
@@ -40,9 +47,17 @@ export const CartSlice = createSlice({
             console.log(action.payload)
             console.log(current(state.value))
             // state.value.defaultValue.cartItems=[...cartItems,action.payload]
+            CartSlice.caseReducers.calculateTotal(state)
+           toast('Item Successfully Added',{
+                            type:"success",
+                            position:'top-center'
+                        })
+
         },
         clearCart:(state)=>{
             state.value= defaultCartValue
+            CartSlice.caseReducers.calculateTotal(state)
+
         },
         removeItem:(state,action)=>{
             let cartList = state.value
@@ -58,7 +73,9 @@ export const CartSlice = createSlice({
                 //     return item
                 // }
             })
-            // console.log(action.payload)
+            // console.log(action.payload) 
+            CartSlice.caseReducers.calculateTotal(state)
+
 
         },
         editItem:(state,action)=>{
@@ -75,8 +92,17 @@ export const CartSlice = createSlice({
                     cartList.cartTotal+=(item.price* item.amount)
                 })
             console.log(action.payload)
+            CartSlice.caseReducers.calculateTotal(state)
+            toast('Item Has Been Updated',{
+                            type:"success",
+                            position:'top-center'
+                        })
             
         },
+        calculateTotal :(state)=>{
+
+            localStorage.setItem('cart',JSON.stringify(state.value))
+        }
     }
 })
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link, useLoaderData, useParams } from 'react-router-dom'
-import { ApiInstance, getNumberOfItems } from '../utilities/Index'
+import { ApiInstance, currencyFormater, getNumberOfItems } from '../utilities/Index'
 import { useDispatch } from 'react-redux'
 import { addItem } from '../features/CartSlice'
 
@@ -8,7 +8,7 @@ import { addItem } from '../features/CartSlice'
 export const loader =async({params})=>{
     const urls = `/products/${params.id}`
     console.log(params)
-    const {data} =await ApiInstance(urls)
+    const {data} = await ApiInstance(urls)
     return {data}
 }
 
@@ -16,24 +16,30 @@ export const loader =async({params})=>{
 const SingleProduct = () => {
     const dispatch = useDispatch()
     const {data}=useLoaderData().data
+    console.log(data)
     const {title,colors,company,image,price,description} = data.attributes
+    const {id} = data
     const [color,setColor] = useState(colors[0])
     const [amount,setAmount]= useState(1)
     const options = getNumberOfItems(12)
     console.log(data)
+
     const  capitalizeFirstLetter=(str)=>{
         return str.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ');
     }
+
     const cartProduct ={
         cartId:data.id+color,
         image,
         title,
         price,
-        color,
+        productColor:color,
         amount,
         company,
+        productId:id
 
     }
+
     console.log(cartProduct)
     const addItems=()=>{
     
@@ -54,7 +60,7 @@ const SingleProduct = () => {
                 <div className='text-[#394E6A]'>
                     <h1 className='text-5xl font-semibold text-[#394E6A]'>{capitalizeFirstLetter(title)}</h1>
                     <h2 className='text-3xl mt-3 font-semibold text-[#C7C9D1]'>{company}</h2>
-                    <p className='text-xl mt-3 mb-3 text-[#394E6A]'>${price}</p>
+                    <p className='text-xl mt-3 mb-3 text-[#394E6A]'>{currencyFormater(price)}</p>
                     <p>{description}</p>
                 </div>
                 <div className='mt-10'>

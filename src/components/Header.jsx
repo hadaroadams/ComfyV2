@@ -1,17 +1,20 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Loading from './Loading'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../features/UserSlice'
 import { clearCart } from '../features/CartSlice'
+import NavLinks from './NavLinks'
 
 const Header = () => {
     const [isdarkMode,setIsDarkMode] = useState(false)
     const {cartItems,numItemsInCart}= useSelector((state)=> state.cart.value)
+    console.log(numItemsInCart)
     const navigate = useNavigate()
-    const {user} = useSelector((state)=>state.user)
+    const {pathname} = useLocation()
+    const {user}= useSelector((state)=>state.user)
     const dispatch= useDispatch()
-    console.log(user)
+    // console.log(data)
     const colorTheme =()=>{
         setIsDarkMode((e)=>{
          return   !e
@@ -34,7 +37,7 @@ const Header = () => {
                 user?(
                     <>
                     <p>
-                        Hello, {user} 
+                        Hello, {user.username} 
                     </p>
                     <button onClick={handlelogout} className=' border-blue-600 border-2 p-1 px-3 rounded-full' >
                         LOGOUT
@@ -52,21 +55,15 @@ const Header = () => {
             <div className="dropdown dropdown-bottom md:hidden ">
                 <label tabIndex={0} className="btn m-1 bg-transparent  col border-none hover:bg-[#CBD5E1] text-[#394E6A] dark:text-[#F0F6FF]"><svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h7" /></svg></label>
                 <ul tabIndex={0} className="dropdown-content  z-[1] menu p-2 shadow rounded-box w-52 bg-[#F0F6FF] dark:bg-[#181920] dark:text-[#F0F6FF] mt-1">
-                    <li><Link to='/'>Home</Link></li>
-                    <li><Link to='About'>About</Link></li>
-                    <li><Link to='Products'>Products</Link></li>
-                    <li><Link to="Cart">Cart</Link></li>
+                    <NavLinks />
                 </ul>
             </div>
             <div className='hidden md:block'>
                 <Link to='/' className="btn btn-info text-4xl bg-[#057AFF] dark:bg-[#FF7AC6] text-[#F0F6FF] border-none">C</Link>
             </div>
-            <ul className="menu  menu-horizontal bg-[transparent]  hidden md:flex dark:text-[#F0F6FF] ">
-                <li><Link to='/'>Home</Link></li>
-                <li><Link to='/About'>About</Link></li>
-                <li><Link to='/Products'>Products</Link></li>
-                <li><Link to='/Cart'>Cart</Link></li>
-            </ul>
+                <ul className="menu  menu-horizontal bg-[transparent]  hidden md:flex dark:text-[#F0F6FF] ">
+                   <NavLinks/>
+                </ul>
             <div>
                 <label className="swap swap-rotate dark:text-[#F8F8F2]">
                     <input type="checkbox" value onClick={colorTheme}/>
@@ -76,7 +73,7 @@ const Header = () => {
                 </label>
                 <div className="indicator">
                     <span className="indicator-item badge badge-secondary top-[6px] left-4 bg-[#0D7EFF] dark:bg-[#FF7AC6] border-none">{numItemsInCart}</span> 
-                    <Link to='/Cart' className="btn rounded-full bg-transparent hover:bg-[#CBD5E1] border-none text-[#394E6A] dark:text-[#F8F8F2] "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="h-6 w-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path></svg></Link>
+                    <Link to='cart' className="btn rounded-full bg-transparent hover:bg-[#CBD5E1] border-none text-[#394E6A] dark:text-[#F8F8F2] "><svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 16 16" class="h-6 w-6" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .49.598l-1 5a.5.5 0 0 1-.465.401l-9.397.472L4.415 11H13a.5.5 0 0 1 0 1H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l.84 4.479 9.144-.459L13.89 4H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"></path></svg></Link>
                 </div>
             </div>
         </nav>
