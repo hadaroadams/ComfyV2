@@ -5,10 +5,18 @@ import { useDispatch } from 'react-redux'
 import { addItem } from '../features/CartSlice'
 
 
-export const loader =async({params})=>{
-    const urls = `/products/${params.id}`
-    console.log(params)
-    const {data} = await ApiInstance(urls)
+export const loader =(queryClient)=>
+async({params})=>{
+    const url = `/products/${params.id}`
+    const singleProductsQuery={
+        queryKey:['SingleProduct',params.id],
+        queryFn:async()=>{
+                return await ApiInstance(url)
+            }
+        }
+    const {data}= await queryClient.ensureQueryData(singleProductsQuery)
+    console.log(data)
+    // const {data} = await ApiInstance(urls)
     return {data}
 }
 
@@ -16,8 +24,8 @@ export const loader =async({params})=>{
 const SingleProduct = () => {
     const dispatch = useDispatch()
     const {data}=useLoaderData().data
-    console.log(data)
     const {title,colors,company,image,price,description} = data.attributes
+    console.log(colors)
     const {id} = data
     const [color,setColor] = useState(colors[0])
     const [amount,setAmount]= useState(1)

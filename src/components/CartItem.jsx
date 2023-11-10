@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux'
 import { editItem, removeItem } from '../features/CartSlice'
 
 const CartItem = ({image,title,company,color,price ,amount,id}) => {
+    console.log(color)
   const dispatch = useDispatch()
   return (
     <article className='flex justify-between pb-4 min-[200px]:flex-col sm:flex-row border-b-2' >

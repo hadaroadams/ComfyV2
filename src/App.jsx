@@ -18,6 +18,8 @@ import store from './utilities/store';
 import CheckOut from './pages/CheckOut';
 import {loader as checkOutLoader} from "./pages/CheckOut"
 import {action as checkOutAction} from './pages/CheckOut'
+import Order from './pages/Order';
+import {loader as orderLoader} from './pages/Order';
 
 const queryClient = new QueryClient()
 const router= createBrowserRouter([
@@ -30,13 +32,13 @@ const router= createBrowserRouter([
         index:true,
         element:<Landing/>,
         errorElement:<ErrorPage/>,
-        loader:LandingLoader,
+        loader:LandingLoader(queryClient),
       },
       {
         path:'/Products/:id',
         element:<SingleProduct/>,
         errorElement:<ErrorPage/>,
-        loader:SinglePageLoader,
+        loader:SinglePageLoader(queryClient),
       },
       {
         path:'/About',
@@ -47,7 +49,7 @@ const router= createBrowserRouter([
         path:'/Products',
         element:<Products/>,
         errorElement:<ErrorPage/>,
-        loader:ProdutsLoader,
+        loader:ProdutsLoader(queryClient),
       },
       {
         path:'/Cart',
@@ -58,8 +60,13 @@ const router= createBrowserRouter([
         path:'/Checkout',
         element:<CheckOut/>,
         errorElement:<ErrorPage/>,
-        loader:checkOutLoader(store),
-        action:checkOutAction(store)
+        loader:checkOutLoader(store,queryClient),
+        action:checkOutAction(store,queryClient)
+      },
+      {
+        path:"/Order",
+        element:<Order/>,
+        loader:orderLoader(store,queryClient)
       }
     ]
   },
@@ -67,18 +74,14 @@ const router= createBrowserRouter([
     path:'/Login',
     element:<LogIn/>,
     errorElement:<ErrorPage/>,
-    action: logInAction(store),
-    // loader:(e)=>{
-    //   console.log(e)
-    //   return ''
-    // }
+    action: logInAction(store,queryClient ),
   },
 
   {
     path:'/Signup',
     element:<SignUp/>,
     errorElement:<ErrorPage/>,
-    action : registrationAction,
+    action : registrationAction(queryClient),
   },
   
   

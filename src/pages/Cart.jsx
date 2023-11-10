@@ -24,7 +24,8 @@ const Cart = () => {
             <div className='flex-[0.6] space-y-5'>
               {
                 cartItems.map((item,key)=>{
-                  const {title,price, image, company,color, cartId, amount}= item
+                  console.log(item)
+                  const {title,price, image, company,productColor:color, cartId, amount}= item
                   console.log("num1   "+amount)
                   return <CartItem key={key} id={cartId} title={title} image={image} color={color} amount={amount} company={company} price={price} />
                 })

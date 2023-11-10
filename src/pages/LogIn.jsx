@@ -42,7 +42,7 @@ const LogIn = () => {
       try{
         const response = await ApiInstance.post('/auth/local',{identifier:'test@test.com',password:'secret'})
         console.log(response)
-        dispatch(loginUser(response.data.user))
+        dispatch(loginUser(response.data))
         navigate('/')
       }catch(error){
         console.log(error)

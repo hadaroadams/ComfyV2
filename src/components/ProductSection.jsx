@@ -12,7 +12,8 @@ const ProductSection = () => {
   const {data,params} = useLoaderData()
   const {search,pathname} = useLocation()
 
-  const param = new URLSearchParams(search)
+  // const param = new URLSearchParams(search)
+ 
   return (
     <section className='mt-10'>
         <div className='flex justify-between'>
@@ -37,6 +38,10 @@ const ProductSection = () => {
                     const  {image,title,company,price}= item.attributes
                       return <ProductItem image={image} title={title} compnay={company} price={price} key={index} id={id} layOut={layOut}/>
                   })
+            
+          }
+          {
+            !(data.data.length) && <h1 className='text-[red] absolute left-0 right-0 w-[200px] my-0 mx-auto font-bold text-[1.3em]'>Search not found</h1>
           }
         </div>
         <div className='flex justify-end my-6 '>

@@ -18,7 +18,8 @@ const PaginationContainer = () => {
     }
   return (
       <div className="join">
-        <button  onClick={()=>{
+        <button  
+        onClick={()=>{
           let num
           if(page>1){
           num =page-1

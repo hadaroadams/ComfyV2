@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { redirect } from 'react-router-dom'
 import { ApiInstance, currencyFormater } from '../utilities/Index'
+import { clearCart } from '../features/CartSlice'
 
 
 export  const loader =(store)=>async()=>{
@@ -27,7 +28,7 @@ export const action =(store)=>
     const {token}=user.user
      console.log(token)
 
-    const {carTotal,numItemsInCart,cartItems}=cart.value
+    const {cartTotal,numItemsInCart,cartItems}=cart.value
     const formData = await request.formData()
     const { name,address } = Object.fromEntries(formData)
     console.log(name)
@@ -36,12 +37,14 @@ export const action =(store)=>
     const info ={
       name,
       address,
+      chargeTotal:cartTotal,
+      orderTotal:currencyFormater(cartTotal),
       cartItems,
       numItemsInCart,
-      orderTotal:currencyFormater(carTotal),
-      chargeTotal:carTotal,
 
     }
+    console.log(store)
+
 
     try{
       
@@ -49,13 +52,23 @@ export const action =(store)=>
         headers:{
           Authorization:`Bearer ${token}`
         }
-
       })
 
+      toast("Order placed successfully",{
+        type:"success",
+        position:"top-center"
+      })
+      
+      store.dispatch(clearCart())
       console.log(response)
+      return redirect('/order')
     
     }catch(error){
-      console.log(error)
+      const message=error.response.data.error.message
+       toast(message,{
+        type:"error",
+        position:"top-center"
+      })
     }
     return null
   }

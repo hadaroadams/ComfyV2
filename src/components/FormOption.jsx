@@ -7,7 +7,7 @@ const FormOption = ({label,options,name,}) => {
       <label htmlFor={name}>
         {label}
       </label>
-      <select onChange={(e)=>{setOpt(e.target.value)}} className='select w-full bg-[#FFFFFF] border-gray-200 '>
+      <select name={name} onChange={(e)=>{setOpt(e.target.value)}} className='select w-full bg-[#FFFFFF] border-gray-200 '>
         {
             options.map((item,key)=>{
                 return (<option value={item} key={key}>{item}</option>)

@@ -16,7 +16,7 @@ const OrderAmount = () => {
               <Link to='/checkout' className='btn bg-blue-600 border-none hover:bg-blue-700 text-white'>{'proceed to checkout'.toLocaleUpperCase()}</Link>
               
             ):(
-              <Link to='/login' className='btn bg-blue-600 border-none hover:bg-blue-700 text-white'>{'proceed to checkout'.toLocaleUpperCase()}</Link>
+              <Link to='/login' className='btn bg-blue-600 border-none hover:bg-blue-700 text-white'>{'please login'.toLocaleUpperCase()}</Link>
               
             )
           }
