@@ -15,7 +15,7 @@ const Header = () => {
     const {user,theme}= useSelector((state)=>state.user)
     const dispatch= useDispatch()
     // console.log(theme)
-    const colorTheme =()=>{
+    const colorTheme = () => {
         setIsDarkMode((e)=>{
          return   !e
         })
@@ -32,21 +32,21 @@ const Header = () => {
     }
   return (
     <>
-        <header className='bg-[#021431] dark:bg-[#414558] text-xs py-2 flex justify-center space-x-5 md:text-base items-center md:justify-end px-20'>
+        <header className='bg-[#021431] text-white dark:bg-[#414558] text-xs py-2 flex justify-center space-x-5 md:text-base items-center md:justify-end px-20'>
             {
                 user?(
                     <>
-                    <p>
+                    <p className='text-white'>
                         Hello, {user.username} 
                     </p>
-                    <button onClick={handlelogout} className=' border-blue-600 dark:border-[#FF7AC6] border-2 p-1 px-3 rounded-full' >
+                    <button onClick={handlelogout} className=' border-blue-600 dark:border-[#FF7AC6] text-white border-2 p-1 px-3 rounded-full' >
                         LOGOUT
                     </button>
                     </>
                 ):(
                     <>
-                        <Link to='/Login' className=' hover:underline'>Sign in/Guest</Link>
-                        <Link to='/Signup' className='hover:underline'>Create Account</Link>
+                        <Link to='/Login' className=' hover:underline  text-white'>Sign in/Guest</Link>
+                        <Link to='/Signup' className='hover:underline text-white'>Create Account</Link>
                     </>
                 )
             }
