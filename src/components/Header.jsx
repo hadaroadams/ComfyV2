@@ -36,10 +36,10 @@ const Header = () => {
             {
                 user?(
                     <>
-                    <p className='text-white'>
+                    <p className='text-[white]'>
                         Hello, {user.username} 
                     </p>
-                    <button onClick={handlelogout} className=' border-blue-600 dark:border-[#FF7AC6] text-white border-2 p-1 px-3 rounded-full' >
+                    <button onClick={handlelogout} className=' border-blue-600 dark:border-[#FF7AC6]  border-2 p-1 px-3 rounded-full' >
                         LOGOUT
                     </button>
                     </>
