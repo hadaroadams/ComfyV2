@@ -13,10 +13,10 @@ const OrderAmount = () => {
           <CartTotal/>
           {
             user?(
-              <Link to='/checkout' className='btn bg-blue-600 border-none hover:bg-blue-700 text-white'>{'proceed to checkout'.toLocaleUpperCase()}</Link>
+              <Link to='/checkout' className='btn dark:bg-[#F67FC5] dark:hover:bg-[#f868bc] bg-blue-600 border-none hover:bg-blue-700 text-white'>{'proceed to checkout'.toLocaleUpperCase()}</Link>
               
-            ):(
-              <Link to='/login' className='btn bg-blue-600 border-none hover:bg-blue-700 text-white'>{'please login'.toLocaleUpperCase()}</Link>
+            ):( 
+              <Link to='/login' className='btn dark:bg-[#F67FC5] dark:hover:bg-[#f868bc] bg-blue-600 border-none hover:bg-blue-700 text-white'>{'please login'.toLocaleUpperCase()}</Link>
               
             )
           }

@@ -28,10 +28,10 @@ const PaginationContainer = () => {
           }else{
             handleNavigation(pageCount)
           }
-        }} className={`join-item btn bg-[#E2E8F4] border-none`}>Prev</button>
+        }} className={`join-item btn bg-[#E2E8F4] dark:bg-[#181920] dark:hover:bg-[black] border-none`}>Prev</button>
         {
           pages.map((item)=>{
-            return <button key={item} onClick={()=>{handleNavigation(item)}} className={`${item===page? 'bg-blue-500':'bg-slate-300'} join-item btn  border-none `}>{item}</button> 
+            return <button key={item} onClick={()=>{handleNavigation(item)}} className={`${item===page? 'bg-blue-500 dark:bg-[#F67FC5] dark:hover:bg-[#e956ac] ':'bg-slate-300 dark:bg-[#181920] dark:hover:bg-[black]'} join-item btn  border-none `}>{item}</button> 
           })
         }
         <button onClick={()=>{
@@ -42,7 +42,7 @@ const PaginationContainer = () => {
           }else{
             handleNavigation(pageCount-page)
           }
-        }} className={`join-item btn bg-[#E2E8F4] border-none `}>Next</button>
+        }} className={`join-item btn bg-[#E2E8F4] dark:bg-[#181920] dark:hover:bg-[black] border-none `}>Next</button>
     </div>  
   )
 }

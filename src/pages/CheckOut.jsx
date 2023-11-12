@@ -9,9 +9,9 @@ import { ApiInstance, currencyFormater } from '../utilities/Index'
 import { clearCart } from '../features/CartSlice'
 
 
-export  const loader =(store)=>async()=>{
+export  const loader =(store,)=>async()=>{
   const {user} = store.getState().user
-  console.log(user)
+  // console.log(user)
   if(!user){
     toast("You must be loaded In to check out",{
       type:'warning',
@@ -22,7 +22,7 @@ export  const loader =(store)=>async()=>{
     return null
 }
 
-export const action =(store)=>
+export const action =(store,queryClient)=>
   async({request})=>{
     const {user,cart} = store.getState()
     const {token}=user.user
@@ -60,7 +60,9 @@ export const action =(store)=>
       })
       
       store.dispatch(clearCart())
+      
       console.log(response)
+      queryClient.removeQueries(['orders'])
       return redirect('/order')
     
     }catch(error){

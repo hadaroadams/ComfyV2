@@ -5,7 +5,6 @@ import { useDispatch } from 'react-redux'
 import { editItem, removeItem } from '../features/CartSlice'
 
 const CartItem = ({image,title,company,color,price ,amount,id}) => {
-    console.log(color)
   const dispatch = useDispatch()
   return (
     <article className='flex justify-between pb-4 min-[200px]:flex-col sm:flex-row border-b-2' >
@@ -22,14 +21,14 @@ const CartItem = ({image,title,company,color,price ,amount,id}) => {
                 <label htmlFor="amount">
                     Amount
                 </label>
-                <select value={amount} onChange={(e)=>{dispatch(editItem({amount:parseInt(e.target.value),cartId:id}))}} className="select select-bordered select-xs  max-w-xs bg-transparent text-[#5e6062] mt-2  w-24 " name='amount' >
+                <select value={amount} onChange={(e)=>{dispatch(editItem({amount:parseInt(e.target.value),cartId:id}))}} className="select select-bordered select-xs  max-w-xs bg-transparent text-[#5e6062] dark:bg-[#272935] dark:text-[white] mt-2  w-24 " name='amount' >
                     {
                         getNumberOfItems(12)
                     }
                 </select>
-                <button onClick={()=>{dispatch(removeItem({cartId:id,amount:amount}))}} className='text-[#4870f1] mt-2 w-fit  '>remove</button>
+                <button onClick={()=>{dispatch(removeItem({cartId:id,amount:amount}))}} className='text-[#4870f1] dark:text-[#F67FC5] mt-2 w-fit  '>remove</button>
             </div>
-            <h1 className='text-[black] font-medium'>{currencyFormater(price)}</h1>
+            <h1 className='text-[black] font-medium dark:text-[white]'>{currencyFormater(price)}</h1>
         </div>
     </article>
   )

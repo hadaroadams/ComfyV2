@@ -3,11 +3,9 @@ import { useLoaderData } from 'react-router-dom'
 
 const OrdersTable = () => {
     const {data}= useLoaderData().response.data
-   
-    console.log(data)
   return (
     <div className="overflow-x-auto">
-        <table className="table table-sm ">
+        <table className="table table-sm  ">
             <thead>
             <tr className='text-[#77869c] border-none'>
                 <th></th> 
@@ -18,14 +16,13 @@ const OrdersTable = () => {
                 <th className='hidden md:block'>Date</th>
             </tr>
             </thead> 
-            <tbody className=''>
+            <tbody className=' dark:bg-[#272935] dark:text-[]'>
                 {
                     data.map((item,index)=>{
                         const {name,address,cartItems,numItemsInCart,orderTotal,updatedAt}=item.attributes
                         const even =(index+1)%2
-                        console.log(even)
                         return (
-                            <tr className={`${!even?"bg-slate-200 ":'bg-white'} text-[#021431] border-none`}>
+                            <tr key={index} className={`${!even?"bg-slate-200 dark:bg-[#181920] ":'bg-white dark:bg-[#272935]'} text-[#181920 ] dark:text-[#EBF2F2] border-none`}>
                                 <th>{index+1}</th> 
                                 <td>{name}</td> 
                                 <td>{address}</td> 

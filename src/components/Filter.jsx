@@ -11,7 +11,7 @@ const Filter = () => {
 
 
   return (
-    <Form className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 xl:grid-cols-4 bg-[#F0F6FF] p-10 mt-20 rounded-lg'>
+    <Form className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 xl:grid-cols-4 bg-[#F0F6FF] dark:text-[white] dark:bg-[#181920] p-10 mt-20 rounded-lg'>
       
         <FormInput name="search" label='Search Product' placeholder='search products'/>
         <FormOption name="category" options={['all','Tables','Chairs','Kids','Sofas','Bed']} label={'Select Category'} />

@@ -20,7 +20,7 @@ const NavLinks = () => {
         if((url === 'checkout'||url === 'order')&& !user) return null
 
         return( 
-            <li key={id} className= {pathname.slice(1)===url?"bg-[#021431] rounded-lg text-white":''}>
+            <li key={id} className= {pathname.slice(1)===url?"bg-[#021431] dark:bg-[#FF7AC6] rounded-lg text-white":''}>
                 <Link to={url}>{text.slice(0,1).toLocaleUpperCase() + text.slice(1)}</Link> 
             </li> 
         )

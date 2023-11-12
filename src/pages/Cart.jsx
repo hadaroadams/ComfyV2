@@ -7,7 +7,7 @@ import OrderAmount from '../components/OrderAmount'
 const Cart = () => {
   const {cartItems}= useSelector((state)=> state.cart.value)
 
-   console.log(cartItems)
+  //  console.log(cartItems)
   if(cartItems.length==0){ {/* would have to change*/}
     return(
     <> 

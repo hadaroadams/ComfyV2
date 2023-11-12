@@ -8,10 +8,10 @@ const urls = '/products'
 
 
 const filterProducts=(queryParams)=>{
-  const {search,category,company,sort,price,page} = queryParams
+  const {search,category,company,sort,price,page,shipping} = queryParams
 
 return {
-  queryKey:['filteredProducts',search,category,company,sort,price,page],
+  queryKey:['filteredProducts',search,category,company,sort,price,page,shipping],
   queryFn:()=>ApiInstance(urls,{params:queryParams})
 }
 }
@@ -20,11 +20,11 @@ export const loader=(queryClient)=>
 async({request})=>{
   let url = new URL(request.url).searchParams.entries()
   const params = Object.fromEntries([...url]) 
-  console.log(params)
+  // console.log(params)
   const {data}= await queryClient.ensureQueryData(filterProducts(params))
-  console.log(new URL(request.url).searchParams.entries())
+  // console.log(new URL(request.url).searchParams.entries())
     // const {data} = await ApiInstance(urls, {params})
-    console.log(data)
+    // console.log(data)
     return {data,params}
 }
 
@@ -33,7 +33,7 @@ const Products = () => {
   const dispatch = useDispatch()
   // console.log(cart)
   return (
-    <div className='mx-20'>
+    <div className='mx-8 md:mx-16'>
         <Filter/>
         <ProductSection/>
     </div>

@@ -21,7 +21,13 @@ import {action as checkOutAction} from './pages/CheckOut'
 import Order from './pages/Order';
 import {loader as orderLoader} from './pages/Order';
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient({
+  defaultOptions:{
+    queries:{
+      staleTime:1000*60*5
+    }
+  }
+})
 const router= createBrowserRouter([
   {
     path:'/',
@@ -81,7 +87,7 @@ const router= createBrowserRouter([
     path:'/Signup',
     element:<SignUp/>,
     errorElement:<ErrorPage/>,
-    action : registrationAction(queryClient),
+    action : registrationAction(),
   },
   
   

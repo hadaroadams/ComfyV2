@@ -9,15 +9,20 @@ import ComplexPagination from '../components/ComplexPagination'
 const url='/orders'
 
 const orderQuery =(params,user)=>{
-    console.log(params)
+    // console.log(params,user)
+
     return{
-        querykey:['orders',params],
-        queryFn:()=>ApiInstance(url,{
-            params,
-             headers:{
-                Authorization:`Bearer ${user.token}`
-            }
+        queryKey:['orders',user.username,params.page?parseInt(params.page): 1],
+        queryFn:async()=>{
+            // console.log(queryKey)
+            return ApiInstance(url,{
+                params,
+                headers:{
+                    Authorization:`Bearer ${user.token}`
+                }
         })
+
+        }
     }
 
 }
@@ -25,23 +30,23 @@ const orderQuery =(params,user)=>{
 export const loader=(store,queryClient)=>
 async({request})=>{
     const { user }= store.getState().user
-    console.log(request)
+    // console.log(request)
     const params =Object.fromEntries([...new URL(request.url).searchParams.entries()])
-    console.log(params)
+    // console.log(params)
 
-    const response =await queryClient.ensureQueryData(orderQuery(params,user))
+    const response = await queryClient.ensureQueryData(orderQuery(params,user))
     return{response}
        
 }
 
 const Order = () => {
     const {total}= useLoaderData().response.data.meta.pagination
-    console.log(total)
+    // console.log(total)
    
   return (
     <div className='mx-10'>
         <CartHeader message={'Your Orders'}/>
-        <h1 className='text-[#394E6A] text-lg my-5'>Total Order: <span className='font-bold'>{total}</span></h1>
+        <h1 className='text-[#394E6A] dark:text-[#EBF2F2] text-lg my-5'>Total Order: <span className='font-bold'>{total}</span></h1>
         <OrdersTable/>
         <ComplexPagination/>
     </div>

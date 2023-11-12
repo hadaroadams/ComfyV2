@@ -6,7 +6,6 @@ const ComplexPagination = () => {
     console.log(page)
     const navigate = useNavigate()
     const {pathname,search}= useLocation()
-    console.log(useLocation())
 
     const handlePageChange=(pageNumber)=>{
         const searchParam = new URLSearchParams(search);
@@ -17,9 +16,8 @@ const ComplexPagination = () => {
 
 
   const addPageButton = ({pageNumber,activeclass})=>{
-    console.log(activeclass)
     return(
-      <button onClick={()=>{handlePageChange(pageNumber)}} className={`${activeclass? 'bg-blue-500':'bg-slate-300'} join-item btn rounded-none  border-none `}>
+      <button onClick={()=>{handlePageChange(pageNumber)}} className={`${activeclass? 'bg-blue-500 dark:bg-[#FF7AC6]':'bg-slate-300 dark:bg-[#181920]'} join-item btn dark:hover:bg-[black]  rounded-none  border-none `}>
         {pageNumber}
       </button>
     )
@@ -32,15 +30,15 @@ const ComplexPagination = () => {
 
       }
       if(page>2){
-        buttons.push(<button className='join-item btn bg-[#E2E8F4] border-none rounded-none '>...</button>)
+        buttons.push(<button className='join-item btn bg-[#E2E8F4] dark:bg-[#181920] border-none rounded-none '>...</button>)
       }
       if(page>2 && page<pageCount-1){
         buttons.push(addPageButton({pageNumber:page,activeclass:true}))
       }
       if(page<pageCount-1){
-        buttons.push(<button className='join-item btn bg-[#E2E8F4] border-none rounded-none '>...</button>)
+        buttons.push(<button className='join-item btn bg-[#E2E8F4] dark:bg-[#181920] border-none rounded-none '>...</button>)
       }
-      if(page===166){
+      if(page===pageCount-1){
         buttons.push(addPageButton({pageNumber:page,activeclass:true}))
 
       }
@@ -52,11 +50,11 @@ const ComplexPagination = () => {
   return (
     <div className='flex justify-end mt-10 '>
       <button
-      className={'join-item btn bg-[#E2E8F4] border-none rounded-l-lg rounded-r-none'}
+      className={'join-item btn bg-[#E2E8F4] dark:bg-[#181920] dark:hover:bg-[black] border-none rounded-l-lg rounded-r-none'}
       onClick={()=>{
         let prev = page-1
         if(page===1){
-          prev = 167
+          prev = pageCount
         }
         handlePageChange(prev)
         }}
@@ -65,10 +63,10 @@ const ComplexPagination = () => {
       {
         renderButton()
       }
-      <button className={'join-item btn bg-[#E2E8F4] border-none rounded-r-lg rounded-l-none '}
+      <button className={'join-item btn bg-[#E2E8F4] dark:bg-[#181920] dark:hover:bg-[black] border-none rounded-r-lg rounded-l-none '}
       onClick={()=>{
         let next = page+1
-        if(page===167){
+        if(page===pageCount){
           next = 1
         }
         handlePageChange(next)

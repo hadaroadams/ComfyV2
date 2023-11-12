@@ -10,7 +10,7 @@ const Landing = () => {
     console.log(data)
     const load = useNavigation()
     const isPageLoading = load.state=="loading"
-    console.log(isPageLoading)
+    // console.log(isPageLoading)
   return (
     <div>
       {
@@ -28,7 +28,7 @@ async()=>{
     const url = '/products?featured=true';
   // console.log(queryClient.ensure)
   const {data}=await queryClient.ensureQueryData({queryKey:['featuredProduct'],queryFn:()=> ApiInstance(url)})
-  console.log(data)
+  // console.log(data)
         // /const data = await ApiInstance(url)
         return data.data
 }

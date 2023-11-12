@@ -15,7 +15,7 @@ async({params})=>{
             }
         }
     const {data}= await queryClient.ensureQueryData(singleProductsQuery)
-    console.log(data)
+    // console.log(data)
     // const {data} = await ApiInstance(urls)
     return {data}
 }
@@ -55,7 +55,7 @@ const SingleProduct = () => {
   return (
     <section className='mt-24 px-8'>
         <div>
-            <ul className='flex space-x-1 text-lg mb-6'>
+            <ul className='flex space-x-1 text-lg mb-6 dark:text-[white]'>
                 <li><Link to='/'>Home</Link></li>
                 <li className=' before:content-[">"] before:mr-1'><Link to='/Products'>product</Link></li>
             </ul>
@@ -65,10 +65,10 @@ const SingleProduct = () => {
                 <img className='h-full w-10/12 rounded-lg' src={image}  alt="" />
             </div>
             <div className='flex-[0.5]'>
-                <div className='text-[#394E6A]'>
-                    <h1 className='text-5xl font-semibold text-[#394E6A]'>{capitalizeFirstLetter(title)}</h1>
-                    <h2 className='text-3xl mt-3 font-semibold text-[#C7C9D1]'>{company}</h2>
-                    <p className='text-xl mt-3 mb-3 text-[#394E6A]'>{currencyFormater(price)}</p>
+                <div className='text-[#394E6A] dark:text-white'>
+                    <h1 className='text-5xl font-semibold text-[#394E6A] dark:text-white'>{capitalizeFirstLetter(title)}</h1>
+                    <h2 className='text-3xl mt-3 font-semibold text-[#C7C9D1] '>{company}</h2>
+                    <p className='text-xl mt-3 mb-3 text-[#394E6A] dark:text-white'>{currencyFormater(price)}</p>
                     <p>{description}</p>
                 </div>
                 <div className='mt-10'>
@@ -78,7 +78,7 @@ const SingleProduct = () => {
                 </div>
                 <div className='flex flex-col space-y-3 my-4 text-[#394E6A]'>
                     <label htmlFor="">Amount</label>
-                    <select onChange={(e)=>setAmount(parseInt(e.target.value))} className="select w-full max-w-xs bg-transparent border-black focus:outline-3 focus:outline focus:outline-red">
+                    <select onChange={(e)=>setAmount(parseInt(e.target.value))} className="select dark:bg-[#272935] dark:text-[white] w-full max-w-xs bg-transparent border-black focus:outline-3 focus:outline focus:outline-red">
                         {
                             options.map((item)=>{
 
@@ -88,7 +88,7 @@ const SingleProduct = () => {
                     </select>
                 </div>
                 <div>
-                    <button onClick={()=>{dispatch(addItem(cartProduct))}} className="btn bg-[#3B3187] hover:bg-[#272060] border-none">ADD TO BAG</button>
+                    <button onClick={()=>{dispatch(addItem(cartProduct))}} className="btn bg-[#3B3187] hover:bg-[#272060] dark:bg-[#F67FC5] dark:text-[white] border-none">ADD TO BAG</button>
                 </div>
             </div>
         </div>
